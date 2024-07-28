@@ -4,10 +4,10 @@
 using namespace std;
 
 #define COMPUTER 1
-#define HUMAN 2
+#define PLAYER 2
 #define SIDE 3
 #define COMPUTERMOVE 'O'
-#define HUMANMOVE 'X'
+#define PLAYERMOVE 'X'
 
 void showBoard(const vector<vector<char>>& board)
 {
@@ -29,7 +29,7 @@ void declareWinner(int whoseTurn) {
     if (whoseTurn == COMPUTER)
         cout << "COMPUTER has won\n";
     else
-        cout << "HUMAN has won\n";
+        cout << "PLAYER has won\n";
 }
 
 bool rowCrossed(const vector<vector<char>>& board) {
@@ -96,7 +96,7 @@ int minimax(vector<vector<char>>& board, int depth, bool isAI) {
                 for (int j = 0; j < SIDE; ++j) {
                     if (board[i][j]!='X' && board[i][j]!='O') 
                     {
-                        board[i][j] = HUMANMOVE;
+                        board[i][j] = PLAYERMOVE;
                         score = minimax(board, depth + 1, true);
                         board[i][j] = char(3*i+j+1+'0');
                         bestScore = min(bestScore, score);
@@ -151,11 +151,11 @@ void playTicTacToe(int whoseTurn) {
             y = n % SIDE;
             board[x][y] = COMPUTERMOVE;
             cout <<"COMPUTER has put a "<<COMPUTERMOVE<<" in cell "<< n+1;
-            showBoard(board);
+            cout << "\n\n";
             ++moveIndex;
-            whoseTurn = HUMAN;
+            whoseTurn = PLAYER;
         }
-        else if (whoseTurn == HUMAN)
+        else if (whoseTurn == PLAYER)
         {
             cout << "Choose available cell number from 1 to 9 to play/continue:";
             showBoard(board);
@@ -166,9 +166,9 @@ void playTicTacToe(int whoseTurn) {
             y = n % SIDE;
             if (n < 9 && n >= 0 && board[x][y]!='X' && board[x][y]!='O')
             {
-                board[x][y] = HUMANMOVE;
-                cout <<"\nHUMAN has put a "<<HUMANMOVE<<" in cell "<<n+1;
-                showBoard(board);
+                board[x][y] = PLAYERMOVE;
+                cout <<"\nPLAYER has put a "<<PLAYERMOVE<<" in cell "<<n+1;
+                cout << "\n\n";
                 ++moveIndex;
                 whoseTurn = COMPUTER;
             } 
@@ -187,14 +187,14 @@ void playTicTacToe(int whoseTurn) {
         cout << "It's a draw\n";
     else
     {
-        declareWinner(whoseTurn == COMPUTER ? HUMAN : COMPUTER);
+        declareWinner(whoseTurn == COMPUTER ? PLAYER : COMPUTER);
     }
 }
 
 int main() {
-    cout << "\n-------------------------------------------------------------------\n\n";
-    cout << "\t\t\t Tic-Tac-Toe\n";
-    cout << "\n-------------------------------------------------------------------\n\n";
+    cout << "\n";
+    cout << "\t\t\t\t\t\t Tic-Tac-Toe Game\n\n";
+    
     char cont = 'y';
     do {
         char choice;
@@ -203,7 +203,7 @@ int main() {
         if (choice == 'n')
             playTicTacToe(COMPUTER);
         else if (choice == 'y')
-            playTicTacToe(HUMAN);
+            playTicTacToe(PLAYER);
         else
             cout << "Invalid choice\n";
 
