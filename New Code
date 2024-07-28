@@ -19,15 +19,6 @@ void showBoard(const vector<vector<char>>& board)
     cout << "\t\t\t " << board[2][0] << " | " << board[2][1] << " | " << board[2][2] << " \n\n";
 }
 
-void showInstructions() {
-    cout << "\nChoose a cell numbered from 1 to 9 as below and play\n\n";
-    cout << "\t\t\t 1 | 2 | 3 \n";
-    cout << "\t\t\t-----------\n";
-    cout << "\t\t\t 4 | 5 | 6 \n";
-    cout << "\t\t\t-----------\n";
-    cout << "\t\t\t 7 | 8 | 9 \n\n";
-}
-
 void initialise(vector<vector<char>>& board) {
     for (int i = 0; i < SIDE; ++i)
         for(int j=0; j<SIDE; j++)
@@ -149,7 +140,6 @@ void playTicTacToe(int whoseTurn) {
     vector<vector<char>> board(SIDE, vector<char>(SIDE));
     int moveIndex = 0, x = 0, y = 0;
     initialise(board);
-    showInstructions();
 
     while (!gameOver(board) && moveIndex != SIDE * SIDE) 
     {
@@ -160,16 +150,16 @@ void playTicTacToe(int whoseTurn) {
             x = n / SIDE;
             y = n % SIDE;
             board[x][y] = COMPUTERMOVE;
-            cout << "COMPUTER has put a " << COMPUTERMOVE << " in cell " << (n + 1) << "\n\n";
+            cout <<"COMPUTER has put a "<<COMPUTERMOVE<<" in cell "<< n+1;
             showBoard(board);
             ++moveIndex;
             whoseTurn = HUMAN;
         }
         else if (whoseTurn == HUMAN)
         {
-            cout << "You can insert in the following positions: ";
+            cout << "Choose available cell number from 1 to 9 to play/continue:";
             showBoard(board);
-            cout << "\n\nEnter the position = ";
+            cout << "Enter the position = ";
             cin >> n;
             --n;
             x = n / SIDE;
@@ -177,7 +167,7 @@ void playTicTacToe(int whoseTurn) {
             if (n < 9 && n >= 0 && board[x][y]!='X' && board[x][y]!='O')
             {
                 board[x][y] = HUMANMOVE;
-                cout << "\nHUMAN has put a " << HUMANMOVE << " in cell " << (n + 1) << "\n\n";
+                cout <<"\nHUMAN has put a "<<HUMANMOVE<<" in cell "<<n+1;
                 showBoard(board);
                 ++moveIndex;
                 whoseTurn = COMPUTER;
