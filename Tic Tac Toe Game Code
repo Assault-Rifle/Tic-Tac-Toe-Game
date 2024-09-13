@@ -213,5 +213,7 @@ int main() {
         if(cont != 'n' && cont != 'y')  cout << "invalid option";
     } while (cont == 'n');
 
+    cout << "\nThe Game has Ended";
+
     return 0;
 }
